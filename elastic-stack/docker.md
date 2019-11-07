@@ -22,6 +22,7 @@ Finally to start a container run the following command:
 docker run \
 --name es \
 --detach \
+--restart always \
 --network elastic \
 --publish 9200:9200 \
 --publish 9300:9300 \
@@ -41,23 +42,27 @@ Once ElasticSearch started you can access it's REST API and check node informati
 curl http://localhost:9200
 ```
 
-To find more information read the official guidelines:  
+More information can be found in the official guidelines:  
 [Install Elasticsearch with Docker](https://www.elastic.co/guide/en/elasticsearch/reference/current/docker.html)
 
 # KIBANA
 
+Create a directory for persisting Kibana data between upgrades:
 ```bash
 sudo mkdir --parents /var/lib/kibana/data/
 ```
 
+Kibana runs process as a user with UID `1000` inside a container. Therefore that user should be set as an owner of new directory:
 ```bash
 sudo chown --recursive 1000:1000 /var/lib/kibana/
 ```
 
+Now preparations are complete and container is ready to be started:
 ```bash
 docker run \
 --name kibana \
 --detach \
+--restart always \
 --network elastic \
 --publish 5601:5601 \
 --volume /var/lib/kibana/data:/var/lib/kibana/data \
@@ -66,23 +71,62 @@ docker run \
 docker.elastic.co/kibana/kibana:7.4.2
 ```
 
+Attach to Kibana logging to verify that there are no errors:
 ```bash
 docker logs kibana --follow
 ```
 
+Kibana is ready to be used once you see log message similar to this:
+```json
+{"type":"log","@timestamp":"2019-11-07T13:37:11Z","tags":["status","plugin:spaces@7.4.2","info"],"pid":8,"state":"green","message":"Status changed from yellow to green - Ready","prevState":"yellow","prevMsg":"Waiting for Elasticsearch"}
+```
+
+Finally Kibana can be tested by opening `http://docker-host:5601` in a browser.
+
+More information can be found in the official guidelines:  
+[Running Kibana on Docker](https://www.elastic.co/guide/en/kibana/current/docker.html)
+
 # METRICBEAT
-Create the index pattern and load visualizations, dashboards, and machine learning jobs
+
+## Install APT package
+
 ```bash
-docker run --name filebeat docker.elastic.co/beats/filebeat:7.4.1 setup -E setup.kibana.host=172.17.0.3:5601 -E output.elasticsearch.hosts=["172.17.0.2:9200"]
-docker run -d --name filebeat --user=root -v "$(pwd)/filebeat.yml:/usr/share/filebeat/filebeat.yml:ro" -v "/var/lib/docker/containers:/var/lib/docker/containers:ro" -v "/var/run/docker.sock:/var/run/docker.sock:ro" docker.elastic.co/beats/filebeat:7.4.1 filebeat -e -strict.perms=false -E output.elasticsearch.hosts=["172.17.0.2:9200"]
+wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -
 ```
 
-# GRAFANA
 ```bash
-docker run -d --name grafana -p 3000:3000 grafana/grafana:6.4.3
-# Cred: admin / admin
+sudo apt-get install apt-transport-https
 ```
 
+```bash
+echo "deb https://artifacts.elastic.co/packages/7.x/apt stable main" | sudo tee -a /etc/apt/sources.list.d/elastic-7.x.list
 ```
-docker stats --format "table {{.CPUPerc}}\t{{.MemUsage}}\t{{.MemPerc}}\t{{.Name}}"
+
+```bash
+sudo apt-get update && sudo apt-get install metricbeat
+```
+
+```bash
+sudo systemctl enable metricbeat
+```
+
+More information can be found in the official guidelines:  
+[Repositories for APT and YUM](https://www.elastic.co/guide/en/beats/metricbeat/current/setup-repositories.html)
+
+## Configuration
+
+```bash
+sudo nano /etc/metricbeat/metricbeat.yml
+```
+
+```bash
+sudo nano /etc/metricbeat/modules.d/system.yml
+```
+
+```bash
+sudo metricbeat modules enable docker
+```
+
+```bash
+sudo nano /etc/metricbeat/modules.d/docker.yml
 ```
