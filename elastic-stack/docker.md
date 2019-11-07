@@ -36,6 +36,11 @@ Make sure ElasticSearch started successfully by reading it's log:
 docker logs es --follow
 ```
 
+Once ElasticSearch started you can access it's REST API and check node information by running:
+```bash
+curl http://localhost:9200
+```
+
 To find more information read the official guidelines:  
 [Install Elasticsearch with Docker](https://www.elastic.co/guide/en/elasticsearch/reference/current/docker.html)
 
