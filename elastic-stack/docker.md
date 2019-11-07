@@ -28,10 +28,15 @@ docker run \
 --volume /var/lib/elasticsearch/data/:/var/lib/elasticsearch/data/ \
 --env "path.data=/var/lib/elasticsearch/data/" \
 --env "discovery.type=single-node" \
-docker.elastic.co/elasticsearch/elasticsearch:7.4.1
+docker.elastic.co/elasticsearch/elasticsearch:7.4.2
 ```
 
-More information can be found here:
+Make sure ElasticSearch started successfully by reading it's log:
+```bash
+docker logs es --follow
+```
+
+To find more information read the official guidelines:  
 [Install Elasticsearch with Docker](https://www.elastic.co/guide/en/elasticsearch/reference/current/docker.html)
 
 # KIBANA
