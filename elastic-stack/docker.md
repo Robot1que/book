@@ -1,13 +1,38 @@
 # SETUP NETWORKING
+
+Create a dedicated network for Elastic Stack apps:
 ```bash
 docker network create --driver bridge elastic
 ```
 
 # ELASTICSEARCH
+
+Before starting container create a folder that will persist ElasticSeach data:
 ```bash
-docker run -d --name es --network elastic -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node" docker.elastic.co/elasticsearch/elasticsearch:7.4.1
-docker run --name es -v /var/lib/elasticsearch/data/:/var/lib/elasticsearch/data/ -e "path.data=/var/lib/elasticsearch/data/" -e "discovery.type=single-node" docker.elastic.co/elasticsearch/elasticsearch:7.4.1
+sudo mkdir --parents /var/lib/elasticsearch/data/
 ```
+
+ElasticSearch run as `elasticseach` user inside a container. That's why we need to change owner of newly created folder:
+```bash
+sudo chown --recursive 1000:1000 /var/lib/elasticsearch/
+```
+
+Finally to start a container run the following command:
+```bash
+docker run \
+--name es \
+--detach \
+--network elastic \
+--publish 9200:9200 \
+--publish 9300:9300 \
+--volume /var/lib/elasticsearch/data/:/var/lib/elasticsearch/data/ \
+--env "path.data=/var/lib/elasticsearch/data/" \
+--env "discovery.type=single-node" \
+docker.elastic.co/elasticsearch/elasticsearch:7.4.1
+```
+
+More information can be found here:
+[Install Elasticsearch with Docker](https://www.elastic.co/guide/en/elasticsearch/reference/current/docker.html)
 
 # KIBANA
 ```bash
