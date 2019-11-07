@@ -45,9 +45,29 @@ To find more information read the official guidelines:
 [Install Elasticsearch with Docker](https://www.elastic.co/guide/en/elasticsearch/reference/current/docker.html)
 
 # KIBANA
+
 ```bash
-docker run -d --name kibana --network elastic -e "ELASTICSEARCH_HOSTS=http://es:9200/" -p 5601:5601 docker.elastic.co/kibana/kibana:7.4.1
-docker run --name kibana -v /var/lib/kibana/data:/var/lib/kibana/data -e "ELASTICSEARCH_HOSTS=http://es:9200/" -e "PATH_DATA=/var/lib/kibana/data" -p 5601:5601 docker.elastic.co/kibana/kibana:7.4.1
+sudo mkdir --parents /var/lib/kibana/data/
+```
+
+```bash
+sudo chown --recursive 1000:1000 /var/lib/kibana/
+```
+
+```bash
+docker run \
+--name kibana \
+--detach \
+--network elastic \
+--publish 5601:5601 \
+--volume /var/lib/kibana/data:/var/lib/kibana/data \
+--env "ELASTICSEARCH_HOSTS=http://es:9200/" \
+--env "PATH_DATA=/var/lib/kibana/data" \
+docker.elastic.co/kibana/kibana:7.4.2
+```
+
+```bash
+docker logs kibana --follow
 ```
 
 # METRICBEAT
