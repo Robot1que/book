@@ -6,7 +6,6 @@ Start SQL Server container:
 docker run \
 --name mssql \
 --detach \
---rm \
 --env "ACCEPT_EULA=Y" \
 --env "MSSQL_SA_PASSWORD=********" \
 --env "MSSQL_AGENT_ENABLED=true" \
