@@ -2,6 +2,12 @@
 
 Configuration example:
 ```yaml
+output.elasticsearch:
+  hosts: ["10.250.0.211:9200"]
+
+processors:
+- add_docker_metadata: ~
+
 filebeat.inputs:
 - type: container
   paths:
@@ -43,3 +49,13 @@ docker run \
 docker.elastic.co/beats/filebeat:7.4.2 \
 filebeat -e -strict.perms=false
 ```
+
+docker run \
+--rm \
+--name=filebeat \
+--user=root \
+--volume="/etc/filebeat/filebeat.docker.yml:/usr/share/filebeat/filebeat.yml:ro" \
+--volume="/var/lib/docker/containers:/var/lib/docker/containers:ro" \
+--volume="/var/run/docker.sock:/var/run/docker.sock:ro" \
+docker.elastic.co/beats/filebeat:7.4.2 \
+filebeat -e -strict.perms=false
