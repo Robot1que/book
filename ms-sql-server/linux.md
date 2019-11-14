@@ -31,8 +31,8 @@ RESTORE
 FROM
     DISK = '/var/opt/mssql/backup/mydb.bak'
 WITH
-    MOVE 'mydb_sys' TO '/var/opt/mssql/data/mydbprim.mdf',
+    MOVE 'mydb_sys' TO '/var/opt/mssql/data/mydb_prim.mdf',
     MOVE 'DATA01' TO '/var/opt/mssql/data/mydb_DATA01.MDF',
     MOVE 'INDEX01' TO '/var/opt/mssql/data/mydb_INDEX01.MDF',
-    MOVE 'mydb_log' TO '/var/opt/mssql/data/mydblog.ldf'
+    MOVE 'mydb_log' TO '/var/opt/mssql/data/mydb_log.ldf'
 ```
