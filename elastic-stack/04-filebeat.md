@@ -1,4 +1,10 @@
-# FILEBEAT
+# Step 4: Setup Filebeat
+
+## Overview
+
+
+
+## 
 
 Configuration example:
 ```yaml

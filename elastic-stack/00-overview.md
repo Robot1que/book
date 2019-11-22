@@ -1,4 +1,6 @@
-# Overview
+# Elastic Stack Overview
+
+## Components
 
 Elastic stack consists of multiple components:
 - **Elasticsearch** - distributed search engine that includes document based database and REST API.
@@ -6,11 +8,11 @@ Elastic stack consists of multiple components:
 - **Metricbeat** - collects data about system and sends it to Elasticsearch.
 - **Filebeat** - reads data from log files and sends it to Elasticsearch.
 
-# Prerequisites
+## Prerequisites
 
 This guide assumes that Elasticseach and Kibana will be installed on the same Linux Docker host.
 
-## Networking
+### Networking
 
 Create a dedicated network for Elastic Stack apps:
 

@@ -56,3 +56,7 @@ Finally Kibana can be tested by opening `http://{docker-host}:5601` in a browser
 
 More information can be found in the official guidelines:  
 [Running Kibana on Docker](https://www.elastic.co/guide/en/kibana/current/docker.html)
+
+---
+
+Next: [Step 3: Setup Metricbeat](03-metricbeat.md)
