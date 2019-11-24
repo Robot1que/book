@@ -95,3 +95,7 @@ Verify status of running Metricbeat daemon and make sure there are no outstandin
 ```bash
 sudo systemctl status metricbeat
 ```
+
+---
+
+Next: [Step 4: Setup Filebeat](04-filebeat.md)
