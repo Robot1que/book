@@ -57,3 +57,32 @@ There are three Azure Cosmos account modes:
 - **Serverless mode**: get billed for the amount of RUs that has been consumed by your database operations.
 
 - **Autoscale mode**: can automatically and instantly scale the throughput (RU/s) based on it's usage.
+
+## Partitions
+
+- **Logical partition**: consists of items that have the same partition key. Also defines the scope of database transaction.
+
+- **Physical partition**: constainer is scaled by distributing data and throughput across physical partitions. Physical partitions are entirely managed by Azure Cosmos DB.
+
+One or more logical partitions are mapped to a single physical partition.
+
+The number of physical partitions in a container depends on the following:
+
+- the number of throughput provisioned (up to 10,000 RU/s per physical partition),
+- the total data storage (up to 50GB of data per physical partition).
+
+Physical partition with too many requests is called "hot".
+
+## Partition Keys
+
+Partition key has two components:
+
+- **Partition key path**: for example `/userId`. Can accept alphanumeric and `_` characters.
+- **Partition key value**: can be of string or numeric types.
+
+Partition key should be a value that:
+- does not change,
+- has high cardinality,
+- spreads RU consumption and data storage evenly acress all logical partitions.
+
+If property that can be used as a partition key does not exist in data, then a **synthetic partition key** can be created.
