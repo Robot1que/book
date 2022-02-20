@@ -86,3 +86,15 @@ Partition key should be a value that:
 - spreads RU consumption and data storage evenly acress all logical partitions.
 
 If property that can be used as a partition key does not exist in data, then a **synthetic partition key** can be created.
+
+## Programming with Cosmos DB
+
+All code for Cosmos DB server-side is written in JavaScript.
+
+There are:
+- stored procedures,
+- pre-triggers,
+- post-triggers,
+- used-defined functions (UDFs).
+
+All input data comes as a string.
