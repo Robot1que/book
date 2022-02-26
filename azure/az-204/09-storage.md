@@ -139,4 +139,9 @@ Rehydration priority can be set by using `x-ms-rehydrate-priority` header. Optio
 - **High priority**
   - request will be prioritised over standard priority
   - may complete in under 1 hour for objects under 10 GB in size.
-  
+
+## Preperties and Metadata
+
+Blob containers support:
+- **System properties**: exist on each blob storage resource. Some can be read or set, while others are read-only.
+- **User-defined metadata**: name/value pairs that are valid HTTP header, so should adhere to all restrictions governing HTTP headers.
