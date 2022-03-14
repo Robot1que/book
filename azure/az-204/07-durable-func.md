@@ -4,7 +4,7 @@
 
 Durable Functions is an extension of Azure Functions. Durable Functions can be used for stateful orchestration of function execution.
 
-You pay only when Durable Function runs, orchestrator function is dealocated when it awaits for an async operation result. It remembers the state and once async operation result is ready, function logic is replayed. Therefore code should be *deterministic*: orchestrator function will be replayed multiple times, and it must produce the same result each time.
+You pay only when Durable Function runs, orchestrator function is deallocated when it awaits for an async operation result. It remembers the state and once async operation result is ready, function logic is replayed. Therefore code should be *deterministic*: orchestrator function will be replayed multiple times, and it must produce the same result each time.
 
 ## Application Patterns
 
@@ -38,7 +38,7 @@ Typical application patterns that can benefit from Durable Functions:
 
 ## Task Hubs
 
-A task hub is a logical container for durable storage resources that are used for orchestrations and entities. Orchestrator, activity, and entity functions can interract with each other only when they are belong to the same task hub.
+A task hub is a logical container for durable storage resources that are used for orchestrations and entities. Orchestrator, activity, and entity functions can interact with each other only when they are belong to the same task hub.
 
 There might be multiple task hubs in a single Azure Storage Account, distinguished by alphanumeric names that start with a letter and the length is between 3 and 45 characters.
 

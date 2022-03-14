@@ -7,11 +7,11 @@ Key benefits:
 - 99.999% read and write availability for multi-region databases,
 - guaranteed reads and writes served in less than 10 milliseconds at the 99th percentile.
 
-## Azure Comsos DB Elements
+## Azure Cosmos DB Elements
 
 ![cosmos-entities.png](./assets/cosmos-entities.png)
 
-- **Acount** - can contain multiple databases.
+- **Account** - can contain multiple databases.
 Maximum 50 Azure Cosmos accounts under an Azure subscription (soft limit).
 
 - **Database** - unit of management for a set of Azure Cosmos containers.
@@ -62,7 +62,7 @@ There are three Azure Cosmos account modes:
 
 - **Logical partition**: consists of items that have the same partition key. Also defines the scope of database transaction.
 
-- **Physical partition**: constainer is scaled by distributing data and throughput across physical partitions. Physical partitions are entirely managed by Azure Cosmos DB.
+- **Physical partition**: container is scaled by distributing data and throughput across physical partitions. Physical partitions are entirely managed by Azure Cosmos DB.
 
 One or more logical partitions are mapped to a single physical partition.
 
@@ -83,7 +83,7 @@ Partition key has two components:
 Partition key should be a value that:
 - does not change,
 - has high cardinality,
-- spreads RU consumption and data storage evenly acress all logical partitions.
+- spreads RU consumption and data storage evenly access all logical partitions.
 
 If property that can be used as a partition key does not exist in data, then a **synthetic partition key** can be created.
 
