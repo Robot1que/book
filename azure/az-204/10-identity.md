@@ -70,3 +70,11 @@ The following scenarios require code to handle Conditional Access challenges:
 - apps accessing multiple services/resources,
 - single-page apps using `MSAL.js`,
 - web apps calling a resource.
+
+## Application Types
+
+Applications tend to separate into the following categories:
+
+- **public client applications**: apps that run on devices or desktop computers, or in a web browser. They're not trusted to safely keep application secrets and support only public client flows.
+- **confidential client applications**: apps that run on servers. They're considered difficult to access, and for that reason capable of keeping an application secret.
+
