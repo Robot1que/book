@@ -24,11 +24,16 @@ Has two service tiers:
 
 ## Authentication
 
-To do any operations with Key Vault, you first need to authenticate to ir. There are three ways to authenticate to Key Vault:
+To do any operations with Key Vault, you first need to authenticate to it. Authentication is done via Azure Active Directory. Authorization may be done via:
+- Azure role-based access control (Azure RBAC) - used when dealing with the management of the vaults.
+- Key Vault policy - used when attempting to access data stored in a vault.
+
+There are three ways to authenticate to Key Vault:
 
 - **Managed identities to Azure resources**: azure automatically rotates the service principal client secret associated with the identity. Recommended as a best practice.
 - **Service principal and certificate**: not recommended as application owner must rotate the certificate.
 - **Service principal and secret**: same as service principal and certificate.
+
 
 ## Data Encryption in Transit
 
