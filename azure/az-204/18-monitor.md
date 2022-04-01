@@ -61,3 +61,36 @@ There are several ways to get started monitoring and analyzing app performance:
 - **Instrument web pages**: for page view, AJAX, and other client-side telemetry.
 - **Analyze mobile app usage**: by integrating with Visual Studio App Center.
 - **Availability tests**: ping website regularly from Azure servers.
+
+## Log-based Metrics
+
+There are two types of metrics:
+
+- **Log-based metrics** behind the scenes are translated into _Kusto queries_ form stored events.
+- **Standard metrics** are stored as pre-aggregated time series.
+
+## App Monitoring Instrumentation
+
+### Auto-instrumentation
+
+Allows to enable app monitoring without changing the code. Only enabling, and sometimes configuring, the agent is required, which collects telemetry automatically.
+
+### Instrumenting for Distributed Tracing
+
+Distributed tracing is the equivalent of call stacks for modern cloud and microservices architectures, with the addition of a simplistic performance profiler. 
+There are two experiences for consuming distributed trace data:
+
+- **Transaction diagnostics view**: provides visibility into one single transaction/request.
+- **Application map view**: aggregates many transactions to show a topological view of how the systems interact, and what the average performance and error rates are.
+
+## Availability Tests
+
+It's possible to set up recurring tests to monitor availability and responsiveness. Application Insights sends web requests to an application at regular intervals from points around the world. It can alert if application isn't responding or responds too slowly.
+
+Up to 100 availability tests per Application Insights resource can be created.
+
+There are three types of availability tests:
+
+- **URL ping test (classic)**: a simple test to validate whether a public endpoint is responding and measure performance associated with that response. Custom success criteria and more advanced features, like allowing retries, can be set.
+- **Standard test (preview)**: similar to URL ping test, but includes SSL certificate validity, proactive lifetime check, HTTP request verb, custom headers, and custom request data.
+- **Custom `TrackAvailability` test**: custom application to run availability tests. Can be used for multi request or authentication test scenarios.
