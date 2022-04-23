@@ -97,3 +97,61 @@ Event Grid provides the following built-in roles:
 - **Event Grid Subscription Contributor**: allows to manage Event Grid event subscription operations.
 - **Event Grid Contributor**: allows to create and manage Event Grid resources.
 - **Event Grid Data Sender**: allows to send event to Event Grid topics.
+
+## Permissions forEvent Subscriptions
+
+Event handler that isn't a WebHook requires write access to that resource. This permissions check prevents an unauthorized user from sending events to the resource.
+
+`Microsoft.EventGrid/EventSubscriptions/Write` permission is required on the resource that is the event source in order to be able to subscribe to it. The required resource differs based on whether event subscription is for system topic or custom topic.
+
+Format of the resource for system topics is:
+```
+/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}/providers/{resource-provider}/{resource-type}/{resource-name}
+```
+
+Format of the resource for custom topics is:
+```
+/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}/providers/Microsoft.EventGrid/topics/{topic-name}
+```
+
+## Event Filtering
+
+There are three filter options available when creating an event subscription:
+- Event types
+- Subject begins with or ends with
+- Advanced fields and operators
+
+Event type filtering example:
+```json
+"filter": {
+  "includedEventTypes": [
+    "Microsoft.Resources.ResourceWriteFailure",
+    "Microsoft.Resources.ResourceWriteSuccess"
+  ]
+}
+```
+
+Subject filtering example:
+```json
+"filter": {
+  "subjectBeginsWith": "/blobServices/default/containers/mycontainer/log",
+  "subjectEndsWith": ".jpg"
+}
+```
+Advanced filtering example:
+```json
+"filter": {
+  "advancedFilters": [
+    {
+      "operatorType": "NumberGreaterThanOrEquals",
+      "key": "Data.Key1",
+      "value": 5
+    },
+    {
+      "operatorType": "StringContains",
+      "key": "Subject",
+      "values": ["container1", "container2"]
+    }
+  ]
+}
+```
