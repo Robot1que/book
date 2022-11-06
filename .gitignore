@@ -1,5 +1,14 @@
-.git
-.idea
+# Dependencies
+/node_modules
 
+# Production
+/build
+
+# Generated files
+.docusaurus
+.cache-loader
+
+# IDE
+.idea
 bin
 obj
