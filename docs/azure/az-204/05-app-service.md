@@ -31,11 +31,22 @@ Each Azure App Service plan defines:
 
 Pricing tiers:
 - **Shared compute**: both **Free** and **Shared** share resource pools with other customers.
-- **Dedicated compute**: the **Basic**, **Standard**, **Premium**, **PremiumV2**, and **PremiumV3** tiers run app on dedicated Azure VMs. The hier the tier, the more VM instances are available for scale-out.
+- **Dedicated compute**: the **Basic**, **Standard**, **Premium**, **PremiumV2**, and **PremiumV3** tiers run app on dedicated Azure VMs. The higher the tier, the more VM instances are available for scale-out.
 - **Isolated**: run dedicated Azure VMs on dedicated Azure Virtual Networks. Provides maximum scale-out capabilities.
 - **Consumption**: only available for _function apps_. Scales dynamically depending on workload.
 
-All apps run on all VM instances configured in the App Service plan.
+## Ties Feature Comparison
+
+| Tier     | App Count | Disk Size | Max Instances | Scaling        | Zone Redundancy | Custom Domain | vNet Integration |
+|----------|----------:|----------:|---------------|----------------|-----------------|---------------|------------------|
+| Free     | 10        | 1 GB      | N/A           | Not supported  | Not supported   | Not supported | Not supported    |
+| Shared   | 100       | 1 GB      | N/A           | Not supported  | Not supported   | Supported     | Not supported    |
+| Basic    | Unlimited | 10 GB     | Up to 3       | Manual         | Not supported   | Supported     | Supported        |
+| Standard | Unlimited | 50 GB     | Up to 10      | Rules          | Not supported   | Supported     | Supported        |
+| Premium  | Unlimited | 250 GB    | Up to 30*     | Rules, Elastic | Supported       | Supported     | Supported        |
+| Isolated | Unlimited | 1 TB      | Up to 100     | Rules, Elastic | Supported       | Supported     | Supported        |
+
+<sup>*</sup> - in select regions.
 
 ## Manual Deployment
 
@@ -53,7 +64,7 @@ Identity providers:
 - Google
 - Twitter
 
-## Multitenant App Service Networking Features
+## Multi-tenant App Service Networking Features
 
 Inbound features:
 - **App-assigned address**: IP-based SSL, unshared dedicated address.
@@ -72,7 +83,7 @@ Consists of:
 - Application settings
 - General settings
 - Path mappings
-  - IIS hadler mapings (only for Windows)
+  - IIS handler mappings (only for Windows)
   - Mount storage
 
 ![App Service General Settings](./assets/app-service-general-settings.png)
@@ -89,9 +100,11 @@ Consists of:
 
 ## Feature Flags
 
-Use **Azure App Confuguration** to manage application feature flags from a centralised place.
+Use **Azure App Configuration** to manage application feature flags from a centralised place.
 
 ## Auto-scale
+
+All apps run on all VM instances configured in the App Service plan.
 
 App service can:
 
@@ -102,8 +115,8 @@ Conditions can be:
 - based on a metric,
 - based in a schedule.
 
-_Time grain_ - period of time while autoscale rule aggregates the values for a metric (in most cases is 1 minute).
-_Duration_ - longer, user-specified period of time when autoscale rule performs further aggregation of the values collected from the _time grain_ (minimum is 5 minutes).
+_Time grain_ - period of time while auto-scale rule aggregates the values for a metric (in most cases is 1 minute).
+_Duration_ - longer, user-specified period of time when auto-scale rule performs further aggregation of the values collected from the _time grain_ (minimum is 5 minutes).
 
 ## Deployment Slots
 
@@ -137,7 +150,7 @@ Settings that aren't swapped:
 - Diagnostic log settings
 - Cross-origin resource sharing (CORS)
 - Virtual network integration
-- Managed indentities
+- Managed identities
 - Settings that end with the suffix `_EXTENSION_VERSION`
 
 Warm-up app settings:
