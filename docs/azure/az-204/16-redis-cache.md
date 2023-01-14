@@ -39,3 +39,17 @@ Stale values can be expired by applying a time to live (TTL) value to a key. Whe
 ## Accessing Cache
 
 A popular high-performance Redis client for the .NET language is [StackExchange.Redis](https://github.com/StackExchange/StackExchange.Redis). The main connection object is the `StackExchange.Redis.ConnectionMultiplexer`. Create a `ConnectionMultiplexer` instance using the static `ConnectionMultiplexer.Connect` or `ConnectionMultiplexer.ConnectAsync` method, passing in either a connection string or a `ConfigurationOptions` object.
+
+## Eviction policies
+
+The exact behavior Redis follows when the `maxmemory` limit is reached is configured using the `maxmemory-policy` configuration directive.
+
+The following policies are available:
+- `noeviction`: New values aren’t saved when memory limit is reached. When a database uses replication, this applies to the primary database
+- `allkeys-lru`: Keeps most recently used keys; removes least recently used (LRU) keys
+- `allkeys-lfu`: Keeps frequently used keys; removes least frequently used (LFU) keys
+- `volatile-lru`: Removes least recently used keys with the expire field set to true.
+- `volatile-lfu`: Removes least frequently used keys with the expire field set to true.
+- `allkeys-random`: Randomly removes keys to make space for the new data added.
+- `volatile-random`: Randomly removes keys with expire field set to true.
+- `volatile-ttl`: Removes keys with expire field set to true and the shortest remaining time-to-live (TTL) value.

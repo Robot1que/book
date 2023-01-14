@@ -31,3 +31,12 @@ The Microsoft Graph .NET SDK is included in the following NuGet packages:
 - `Microsoft.Graph.Beta` - contains the models and request builders for accessing the `beta` endpoint with the fluent API.
 - `Microsoft.Graph.Core` - core library for making calls to Microsoft Graph.
 - `Microsoft.Graph.Auth` - wrapper for MSAL for use with the Microsoft Graph SDK.
+
+## Permissions
+
+Constraints:
+- **All**
+- **OwnedBy** - allows operations only on applications and service principals that the calling app is an owner of.
+- **Shared**
+- **AppFolder**
+- **CreatedByApp**

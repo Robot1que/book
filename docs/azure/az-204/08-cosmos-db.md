@@ -37,11 +37,11 @@ Developers make a choice between high availability and performance by choosing o
 
 ## Supported APIs
 
-- Core (SQL) API
-- API for MongoDB
-- Cassandra API
-- Table API
-- Gremlin API
+- **Core (SQL) API** - allows to use SQL.
+- **API for MongoDB** - document-based DB.
+- **Cassandra API** - column-based DB.
+- **Table API** - key-value DB.
+- **Gremlin API** - graph DB.
 
 ## Request Units (RUs)
 

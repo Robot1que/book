@@ -5,7 +5,9 @@
         "backplane",
         "clsx",
         "Kusto",
-        "microservices"
+        "microservices",
+        "uksouth",
+        "VHDX"
     ],
     "files.exclude": {
         "**/.git": true,

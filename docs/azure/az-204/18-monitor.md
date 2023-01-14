@@ -62,6 +62,17 @@ There are several ways to get started monitoring and analyzing app performance:
 - **Analyze mobile app usage**: by integrating with Visual Studio App Center.
 - **Availability tests**: ping website regularly from Azure servers.
 
+Application Insights allows to monitor the following usage analytics:
+
+- **Users** - how many people used the app and its features.
+- **Sessions** - how many sessions of user activity have included certain pages and features of the app.
+- **Events** - how ofter are certain pages and features of the app are used.
+- **Funnels** - the progression through a series of steps in a web application is known as a _funnel_. Funnels are limited to a maximum of six steps.
+- **User Flows** - visualises how users navigate between the pages and features of the app.
+- **Retention** - how many users return to the app, and how often they perform particular tasks or achieve goals.
+- **Impact** - discovers how any dimension of a page view, custom event, or request affects the usage of a different page view or custom event.
+- **Cohorts** - a _cohort_ is a set of user, sessions, events, or operations that have something in common.
+
 ## Log-based Metrics
 
 There are two types of metrics:
@@ -77,7 +88,7 @@ Allows to enable app monitoring without changing the code. Only enabling, and so
 
 ### Instrumenting for Distributed Tracing
 
-Distributed tracing is the equivalent of call stacks for modern cloud and microservices architectures, with the addition of a simplistic performance profiler. 
+Distributed tracing is the equivalent of call stacks for modern cloud and microservices architectures, with the addition of a simplistic performance profiler.
 There are two experiences for consuming distributed trace data:
 
 - **Transaction diagnostics view**: provides visibility into one single transaction/request.

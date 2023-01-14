@@ -8,7 +8,7 @@
 
 ## Azure  Container Registry Tasks (ACR tasks)
 
-- **Quick task** - build and push iamge to a registry without needing a local Docker engine.
+- **Quick task** - build and push image to a registry without needing a local Docker engine.
 - **Automatically triggered task** - enable triggers to build an image:
   - on source code update,
   - on base image update,

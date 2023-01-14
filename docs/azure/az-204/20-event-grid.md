@@ -56,6 +56,7 @@ When Event Grid receives an error for an event delivery attempt, Event Grid deci
 - drop the event based on the type of the error.
 
 These types of endpoints and errors for which retry doesn't happen:
+
 | Endpoint Type | Error codes |
 | ------------- | ----------- |
 | Azure Resources | `400 Bad Request`, `403 Forbidden`, `413 Payload Too Large` |
@@ -98,7 +99,7 @@ Event Grid provides the following built-in roles:
 - **Event Grid Contributor**: allows to create and manage Event Grid resources.
 - **Event Grid Data Sender**: allows to send event to Event Grid topics.
 
-## Permissions forEvent Subscriptions
+## Permissions for Event Subscriptions
 
 Event handler that isn't a WebHook requires write access to that resource. This permissions check prevents an unauthorized user from sending events to the resource.
 
